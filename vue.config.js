@@ -1,21 +1,49 @@
 const TerserPlugin = require('terser-webpack-plugin')
+const path = require('path')
 
-const isDevelopment = process.env.NODE_ENV === 'development'
+const components = require('./build/compontents.json')
+
+const isDevelopment = true
 
 module.exports = {
   publicPath: './',
-  // assetsDir: 'gblCLi',
   productionSourceMap: isDevelopment,
-  // 压缩图片
+  pages: isDevelopment
+    ? undefined
+    : {
+        examples: {
+          entry: 'lib/main.ts'
+        }
+      },
   chainWebpack: config => {
+    // 修改路径
+    config.resolve.alias
+      .set('@', path.resolve('src'))
+      .set('~', path.resolve('packages'))
+    // 压缩图片
     config.module
       .rule('images')
       .use('image-webpack-loader')
       .loader('image-webpack-loader')
       .options({ bypassOnDebug: true })
       .end()
+    // 增加package文件夹
+    config.module
+      .rule('js')
+      .include
+      .add('/packages')
+      .end()
+      .use('babel')
+      .loader('babel-loader')
   },
   configureWebpack: config => {
+    if (!isDevelopment) {
+      config.entry = components
+      config.output = {
+        filename: '[name].js',
+        libraryTarget: 'commonjs2'
+      }
+    }
     config.optimization = {
       // 代码压缩
       minimizer: [
