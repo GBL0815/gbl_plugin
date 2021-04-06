@@ -1,8 +1,7 @@
 <template>
   <div class="home">
-    <a @click="toHelp">toHelp</a>
-    <HelloWorld :msg="testStore"></HelloWorld>
-    <img class="logo" src="@/assets/img/logo.png" alt="">
+    <!-- <img class="logo" src="@/assets/img/logo.png" alt=""> -->
+    <LLRunBtn RunText="奔跑按钮" IngText="奔跑中～" :active="active" @click="test()"></LLRunBtn>
   </div>
 </template>
 
@@ -12,17 +11,15 @@ import {
   onMounted,
   ref
 } from 'vue'
-import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
-
-import HelloWorld from '@/components/HelloWorld.vue'
+// import { useRouter } from 'vue-router'
+// import { useStore } from 'vuex'
 
 export default defineComponent({
-  components: { HelloWorld },
   setup () {
-    const router = useRouter()
-    const store = useStore()
-    const testStore = ref<string>(store.state.home.test)
+    // const router = useRouter()
+    // const store = useStore()
+    // const testStore = ref<string>(store.state.home.test)
+    const active = ref(false)
 
     onMounted((): void => {
       console.log('mounted')
@@ -33,13 +30,14 @@ export default defineComponent({
       console.log('init')
     }
 
-    const toHelp = (): void => {
-      router.push('/help')
+    const test = (): void => {
+      active.value = true
     }
 
     return {
-      testStore,
-      toHelp
+      active,
+      // testStore
+      test
     }
   }
 })
