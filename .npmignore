@@ -32,7 +32,7 @@ build/
 src/
 packages/
 public/
-lib/
+push/
 vue.config.js
 babel.config.js
 tsconfig.json

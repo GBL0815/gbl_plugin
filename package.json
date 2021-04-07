@@ -1,16 +1,19 @@
 {
   "name": "gbl_plugin",
-  "version": "0.5.3",
+  "version": "0.5.6",
   "private": false,
   "description": "自用插件整合",
   "keywords": [
     "gbl",
     "gbl_plugin"
   ],
-  "main": "dist/gbl_plugin.min.js",
+  "main": "lib/gbl_plugin.umd.min.js",
+  "author": "葛倍良",
+  "license": "ISC",
   "scripts": {
     "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "build-push": "vue-cli-service build --target lib --name gbl_plugin --dest lib packages/index.ts"
   },
   "dependencies": {
     "axios": "^0.21.1",

@@ -11,7 +11,8 @@ module.exports = {
     ? undefined
     : {
         index: {
-          entry: 'lib/main.ts'
+          entry: 'push/main.ts',
+          filename: 'index.html'
         }
       },
   chainWebpack: config => {
@@ -30,7 +31,7 @@ module.exports = {
     config.module
       .rule('js')
       .include
-      .add('/packages')
+      .add('/packages/')
       .end()
       .use('babel')
       .loader('babel-loader')
@@ -39,7 +40,6 @@ module.exports = {
     if (!isDevelopment) {
       config.entry = components
       // config.output = {
-      //   filename: '[name].js',
       //   libraryTarget: 'commonjs2'
       // }
     }
