@@ -1,13 +1,13 @@
 {
   "name": "gbl_plugin",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": false,
   "description": "自用插件整合",
   "keywords": [
     "gbl",
     "gbl_plugin"
   ],
-  "main": "dist/gbl_plugin.js",
+  "main": "dist/gbl_plugin.min.js",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build"
