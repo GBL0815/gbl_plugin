@@ -1,11 +1,11 @@
 const fs = require('fs-extra')
 const path = require('path')
 
-const isDir = (dir: unknown) => {
+const isDir = (dir) => {
   return fs.lstatSync(dir).isDirectory()
 }
 
-const transformStr3 = (str: string) => {
+const transformStr3 = (str) => {
   const re = /-(\w)/g
   return str.replace(re, ($0, $1) => {
     return $1.toUpperCase()

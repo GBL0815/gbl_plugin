@@ -1,3 +1,3 @@
 {
-    "run_btn": "/packages/LLRunBtn/index"
+    "LLRunBtn": "/packages/LLRunBtn/index.ts"
 }
