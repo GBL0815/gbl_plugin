@@ -24,4 +24,4 @@ files.forEach(file => {
   }
 })
 
-// console.log(JSON.stringify(json))
+console.log(JSON.stringify(json))

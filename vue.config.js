@@ -43,51 +43,5 @@ module.exports = {
       //   libraryTarget: 'commonjs2'
       // }
     }
-    config.optimization = {
-      // 抽离公共文件
-      splitChunks: {
-        cacheGroups: {
-          vendor: {
-            chunks: 'all',
-            test: /node_modules/,
-            name: 'vendor',
-            minChunks: 1,
-            maxInitialRequests: 5,
-            minSize: 0,
-            priority: 100
-          },
-          common: {
-            chunks: 'all',
-            test: /[\\/]src[\\/]js[\\/]ts[\\/]/,
-            name: 'common',
-            minChunks: 2,
-            maxInitialRequests: 5,
-            minSize: 0,
-            priority: 60
-          },
-          styles: {
-            name: 'styles',
-            test: /\.(sa|sc|c)ss$/,
-            chunks: 'all',
-            enforce: true
-          },
-          runtimeChunk: {
-            name: 'manifest'
-          }
-        }
-      }
-    }
-  },
-  devServer: {
-    disableHostCheck: true,
-    // 自动启动浏览器
-    open: true,
-    proxy: {
-      '': {
-        target: 'https://mock.yonyoucloud.com/mock/5859/test', // 后端地址
-        changeOrigin: true,
-        ws: true
-      }
-    }
   }
 }

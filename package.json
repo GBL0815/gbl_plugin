@@ -1,6 +1,6 @@
 {
   "name": "gbl_plugin",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "private": false,
   "description": "自用插件整合",
   "keywords": [
@@ -15,7 +15,6 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.10.0",
-    "register-service-worker": "^1.7.2",
     "vue": "^3.0.5",
     "vue-class-component": "^8.0.0-rc.1",
     "vue-router": "^4.0.3",
