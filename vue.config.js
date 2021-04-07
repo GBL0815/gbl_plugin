@@ -1,9 +1,8 @@
-const TerserPlugin = require('terser-webpack-plugin')
 const path = require('path')
 
 const components = require('./build/compontents.json')
 
-const isDevelopment = true
+const isDevelopment = false
 
 module.exports = {
   publicPath: './',
@@ -39,27 +38,12 @@ module.exports = {
   configureWebpack: config => {
     if (!isDevelopment) {
       config.entry = components
-      config.output = {
-        filename: '[name].js',
-        libraryTarget: 'commonjs2'
-      }
+      // config.output = {
+      //   filename: '[name].js',
+      //   libraryTarget: 'commonjs2'
+      // }
     }
     config.optimization = {
-      // 代码压缩
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            ecma: undefined,
-            parse: {},
-            compress: {
-              drop_console: true,
-              drop_debugger: true,
-              pure_funcs: ['console.log']
-            }
-          },
-          parallel: true
-        })
-      ],
       // 抽离公共文件
       splitChunks: {
         cacheGroups: {

@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import LLRunBtn from '~/LLRunBtn/LLRunBtn.vue'
+import LLRunBtn from '~/LLRunBtn/index'
 import '../public/common.scss'
 
 const app = createApp({})
