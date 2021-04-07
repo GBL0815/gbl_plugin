@@ -10,7 +10,7 @@ module.exports = {
   pages: isDevelopment
     ? undefined
     : {
-        examples: {
+        index: {
           entry: 'lib/main.ts'
         }
       },

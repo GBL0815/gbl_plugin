@@ -1,6 +1,6 @@
 {
   "name": "gbl_plugin",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "private": false,
   "description": "自用插件整合",
   "keywords": [
@@ -25,7 +25,6 @@
     "@typescript-eslint/parser": "^4.21.0",
     "@vue/cli-plugin-babel": "~4.5.12",
     "@vue/cli-plugin-eslint": "~4.5.12",
-    "@vue/cli-plugin-pwa": "~4.5.12",
     "@vue/cli-plugin-router": "~4.5.12",
     "@vue/cli-plugin-typescript": "~4.5.12",
     "@vue/cli-plugin-vuex": "~4.5.12",
