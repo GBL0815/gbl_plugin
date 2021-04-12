@@ -1,6 +1,6 @@
 {
   "name": "gbl_plugin",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "private": false,
   "description": "自用插件整合",
   "keywords": [
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "core-js": "^3.10.0",
+    "core-js": "^3.10.1",
     "vue": "^3.0.5",
     "vue-class-component": "^8.0.0-rc.1",
     "vue-router": "^4.0.3",
@@ -35,17 +35,17 @@
     "@vue/compiler-sfc": "^3.0.11",
     "@vue/eslint-config-standard": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
-    "eslint": "^7.23.0",
+    "eslint": "^7.24.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-standard": "^5.0.0",
     "eslint-plugin-vue": "^7.8.0",
     "image-webpack-loader": "^7.0.1",
     "lint-staged": "^10.5.4",
     "sass": "^1.32.8",
     "sass-loader": "^10.1.1",
-    "typescript": "~4.2.3"
+    "typescript": "~4.2.4"
   },
   "eslintConfig": {
     "root": true,
