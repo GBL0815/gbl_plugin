@@ -1,7 +1,5 @@
 # gbl_plugin
 
-## PS
+## 文档地址
 
-image-webpack-loader 需要用cnpm安装
-
-### 文档
+<https://gbl0815.github.io/gbl_plugin/#/home>

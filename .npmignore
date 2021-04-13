@@ -10,6 +10,7 @@ yarn.lock
 # production
 /build
 /dist
+/logo
 
 # misc
 .DS_Store
