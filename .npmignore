@@ -10,6 +10,7 @@ yarn.lock
 # production
 /build
 /dist
+/docs
 /logo
 
 # misc
@@ -35,7 +36,6 @@ src/
 packages/
 public/
 push/
-/docs
 vue.config.js
 babel.config.js
 tsconfig.json
