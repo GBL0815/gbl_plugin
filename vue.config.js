@@ -2,19 +2,20 @@ const path = require('path')
 
 const components = require('./build/compontents.json')
 
-const isDevelopment = true
+const isDevelopment = process.env.NODE_ENV === 'development'
+const isLib = false
 
 module.exports = {
   publicPath: './',
   productionSourceMap: isDevelopment,
-  pages: isDevelopment
-    ? undefined
-    : {
+  pages: isLib
+    ? {
         index: {
           entry: 'push/main.ts',
           filename: 'index.html'
         }
-      },
+      }
+    : undefined,
   chainWebpack: config => {
     // 修改路径
     config.resolve.alias
