@@ -2,7 +2,7 @@ const path = require('path')
 
 const components = require('./build/compontents.json')
 
-const isDevelopment = false
+const isDevelopment = true
 
 module.exports = {
   publicPath: './',

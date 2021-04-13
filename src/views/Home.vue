@@ -4,7 +4,7 @@
     <header>
       <!-- LOGO容器 -->
       <div class="logoRoom">
-        <a href="/">
+        <a href="https://gbl0815.github.io/gbl_plugin/#/">
           <img src="@/assets/img/logo.png" alt="">
           GBL Plugin
         </a>

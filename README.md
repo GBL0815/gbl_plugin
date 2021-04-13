@@ -2,4 +2,4 @@
 
 ## 文档地址
 
-<https://gbl0815.github.io/gbl_plugin/#/home>
+<https://gbl0815.github.io/gbl_plugin/#/>
