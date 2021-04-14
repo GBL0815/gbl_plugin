@@ -1,6 +1,6 @@
 <template>
   <div class="LLRunBtn">
-    <LLRunBtn RunText="奔跑按钮" IngText="奔跑中～" :active="active" @click="test()"></LLRunBtn>
+    <LLRunBtn RunText="点我" IngText="开冲!" :active="active" @click="test()"></LLRunBtn>
     <p>马上，马上就写文档</p>
   </div>
 </template>
@@ -19,6 +19,9 @@ export default defineComponent({
     // 按钮点击效果
     const test = (): void => {
       active.value = true
+      setTimeout(() => {
+        active.value = false
+      }, 2000)
     }
     return {
       // 变量

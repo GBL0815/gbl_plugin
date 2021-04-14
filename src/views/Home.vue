@@ -21,13 +21,13 @@
       <!-- 侧边栏 -->
       <aside>
         <button class="moneyButton" @click="goMoney">想给我送钱?</button>
-        <div class="pluginNav">
-          <span>插件总览</span>
+        <div class="pluginNav scrollBar">
+          <span class="guide" @click="goGuide">使用指南</span>
           <navBlock v-for="(item, index) in navList" :key="index" :title="item.title" :children="item.children" :index="index" />
         </div>
       </aside>
       <!-- 主内容 -->
-      <div class="content">
+      <div class="content scrollBar" style="overflow-y: auto;">
         <router-view />
       </div>
     </div>
@@ -58,7 +58,13 @@ export default defineComponent({
       console.log('mounted')
     })
 
-    // 前往moen页
+    // 前往指南页
+    const goGuide = (): void => {
+      store.commit('choosed', { index0: -1, index1: -1 })
+      router.push('/index')
+    }
+
+    // 前往money页
     const goMoney = (): void => {
       store.commit('choosed', { index0: -1, index1: -1 })
       router.push('/money')
@@ -68,6 +74,7 @@ export default defineComponent({
       // 变量
       navList,
       // 方法
+      goGuide,
       goMoney
     }
   }
@@ -113,7 +120,6 @@ export default defineComponent({
     display: flex;
     aside {
       width: 16.7%;height: 100%;
-      overflow-y: auto;
       display: flex;
       flex-direction: column;
       .moneyButton {
@@ -126,8 +132,15 @@ export default defineComponent({
         cursor: pointer;
       }
       .pluginNav {
-        width: calc(100% - 1px);min-height: calc(100% - 82px);
+        flex: 1;
+        width: calc(100% - 1px);
         border-right: 1px solid #f0f0f0;
+        padding-bottom: 80px;
+        .guide {
+          color: #1890ff;
+          font-weight: bold;
+          cursor: pointer;
+        }
         span {
           padding-left: 40px;
         }
@@ -135,7 +148,7 @@ export default defineComponent({
     }
     .content {
       flex: 1;
-      height: 100%;
+      height: calc(100vh - 104px)
     }
   }
 }

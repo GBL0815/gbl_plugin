@@ -3,7 +3,7 @@ const path = require('path')
 const components = require('./build/compontents.json')
 
 const isDevelopment = process.env.NODE_ENV === 'development'
-const isLib = false
+const isLib = true
 
 module.exports = {
   publicPath: './',
@@ -11,7 +11,7 @@ module.exports = {
   pages: isLib
     ? {
         index: {
-          entry: 'push/main.ts',
+          entry: 'publish/main.ts',
           filename: 'index.html'
         }
       }

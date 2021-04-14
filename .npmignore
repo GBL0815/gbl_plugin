@@ -35,7 +35,7 @@ build/
 src/
 packages/
 public/
-push/
+publish/
 vue.config.js
 babel.config.js
 tsconfig.json

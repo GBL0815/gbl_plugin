@@ -2,12 +2,12 @@
   <button
     ref="runbtn"
     :style="btnStyle"
-    :class="{'active':active}"
+    :class="{'active': active}"
     @click="handleClick"
     class="running-button"
   >
-    <span class="default">{{RunText}}</span>
-    <span class="active">{{IngText}}</span>
+    <span class="default">{{ RunText }}</span>
+    <span class="active">{{ IngText }}</span>
     <div class="running">
       <div class="outer">
         <div class="body">
@@ -40,39 +40,68 @@ export default defineComponent({
       type: String,
       default: 'Ing'
     },
-
     active: {
       type: Boolean,
       default: false
+    },
+    bgColor: {
+      type: String,
+      default: '#ff69b4'
+    },
+    bgColor_active: {
+      type: String,
+      default: '#1e90ff'
+    },
+    color: {
+      type: String,
+      default: '#ffffff'
+    },
+    height: {
+      type: String,
+      default: '35px'
     }
   },
   setup (props, context) {
+    // 变量
     const runbtn = ref()
     const btnWidth = ref(0)
     const btnStyle = computed(() => {
+      const universalStyle = {
+        height: props.height,
+        color: props.color
+      }
+      let style = {}
       if (props.active) {
-        return {
+        style = {
           '--b': 'var(--background-active)',
           '--default-x': '100%',
-          '--active-x': '-12%',
-          '--running-x': `${btnWidth.value - 10}px`
+          '--active-x': '-8%',
+          '--running-x': `${btnWidth.value - 10}px`,
+          '--background-active': props.bgColor_active
         }
       } else {
-        return ''
+        style = {
+          '--background': props.bgColor
+        }
       }
+      return { ...style, ...universalStyle }
     })
 
+    // 生命周期
     onMounted((): void => {
       btnWidth.value = runbtn.value.clientWidth
     })
 
+    // 点击事件
     const handleClick = () => {
       context.emit('click')
     }
 
     return {
+      // 变量
       runbtn,
       btnStyle,
+      // 方法
       handleClick
     }
   }
@@ -83,18 +112,15 @@ export default defineComponent({
 .running-button + .running-button {
   margin-left: 10px;
 }
-
 .running {
   --color: red;
   --duration: 0.8s;
   display: inline-block;
-
   transform: scale(var(--scale, 1));
   .outer {
     animation: outer var(--duration) linear infinite;
     .body {
-      height: 15px;
-      width: 8px;
+      height: 15px;width: 8px;
       border-radius: 4px;
       transform-origin: 4px 11px;
       position: relative;
@@ -102,11 +128,9 @@ export default defineComponent({
       animation: body var(--duration) linear infinite;
       &:before {
         content: "";
-        width: 8px;
-        height: 8px;
+        width: 8px;height: 8px;
         border-radius: 4px;
-        bottom: 16px;
-        left: 0;
+        bottom: 16px;left: 0;
         position: absolute;
         background: var(--color);
       }
@@ -115,10 +139,8 @@ export default defineComponent({
       .leg,
       .leg:before {
         content: "";
-        width: var(--w, 11px);
-        height: 4px;
-        top: var(--t, 0);
-        left: var(--l, 2px);
+        width: var(--w, 11px);height: 4px;
+        top: var(--t, 0);left: var(--l, 2px);
         border-radius: 2px;
         transform-origin: 2px 2px;
         position: absolute;
@@ -174,13 +196,11 @@ export default defineComponent({
           }
           &:after {
             content: "";
-            top: 0;
-            right: 0;
-            height: 4px;
-            width: 6px;
+            position: absolute;
+            top: 0;right: 0;
+            height: 4px;width: 6px;
             clip-path: polygon(2px 0, 6px 0, 6px 4px, 0 4px);
             border-radius: 0 2px 2px 0;
-            position: absolute;
             background: var(--color);
           }
         }
@@ -189,11 +209,6 @@ export default defineComponent({
   }
 }
 .running-button {
-  --color: #f6f8ff;
-  --background: #ff69b4;
-  --background-hover: #{darken(#ff69b4, 5%)};
-  --background-active: #1e90ff;
-  --background-active-hover: #{darken(#1e90ff, 5%)};
   --shadow: #{rgba(#00093d, 0.2)};
   --padding-y: 4px;
   --padding-x: 36px;
@@ -214,9 +229,7 @@ export default defineComponent({
   color: var(--color);
   background: var(--b, var(--background));
   transform: translateY(var(--y, 0));
-  // width: 100px;
   padding: 5px 10px;
-  // height: 30px;
   span {
     display: block;
     transition: transform 0.4s ease;
@@ -234,10 +247,9 @@ export default defineComponent({
     --scale: 0.64;
     --color: #fff;
     position: absolute;
-    top: 5px;
-    right: 105%;
+    top: 42%;right: 105%;
     transition: transform 0.4s ease;
-    transform: translateX(var(--running-x, -8px)) scale(var(--scale));
+    transform: translate(var(--running-x, -8px), -50%) scale(var(--scale));
   }
   &:hover {
     --b: var(--background-hover);
