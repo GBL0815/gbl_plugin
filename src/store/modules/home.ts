@@ -7,6 +7,7 @@ const home = {
         title: '通用',
         children: [
           { title: 'LLRunBtn 奔跑按钮', route: '/LLRunBtn', choosed: false },
+          { title: 'LLCountTo 数字翻牌器', route: '/LLCountTo', choosed: false },
           { title: '一滴都没有了', route: '/none', choosed: false }
         ]
       }
