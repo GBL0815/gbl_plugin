@@ -91,13 +91,10 @@ export default defineComponent({
     const rAF = ref(null)
     // 计算属性
     const countDown = computed(() => props.startVal > props.endVal)
+    const startVal = computed(() => props.startVal)
+    const endVal = computed(() => props.endVal)
     // 监听
-    watch(props.startVal, () => {
-      if (props.autoplay) {
-        start()
-      }
-    })
-    watch(props.endVal, () => {
+    watch([startVal, endVal], () => {
       if (props.autoplay) {
         start()
       }

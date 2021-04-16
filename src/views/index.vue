@@ -33,7 +33,7 @@
         <span class="punctuation">)</span>
       </div>
     </code>
-    <h3 class="tab">按需引入</h3>
+    <h3 class="tab">按需引入(暂不支持)</h3>
     <p>在main.js中添加以下内容</p>
     <code class="code">
       <div class="line">

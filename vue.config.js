@@ -3,7 +3,7 @@ const path = require('path')
 const components = require('./build/compontents.json')
 
 const isDevelopment = process.env.NODE_ENV === 'development'
-const isLib = true
+const isLib = false
 
 module.exports = {
   publicPath: './',
