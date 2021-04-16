@@ -1,3 +1,4 @@
+const TerserPlugin = require('terser-webpack-plugin')
 const path = require('path')
 
 const components = require('./build/compontents.json')
@@ -40,9 +41,23 @@ module.exports = {
   configureWebpack: config => {
     if (isLib) {
       config.entry = components
-      // config.output = {
-      //   libraryTarget: 'commonjs2'
-      // }
+    }
+    config.optimization = {
+      // 代码压缩
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            ecma: undefined,
+            parse: {},
+            compress: {
+              drop_console: true,
+              drop_debugger: true,
+              pure_funcs: ['console.log']
+            }
+          },
+          parallel: true
+        })
+      ]
     }
   }
 }
