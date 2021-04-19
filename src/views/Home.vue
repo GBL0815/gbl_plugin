@@ -40,7 +40,7 @@ import {
   onMounted,
   ref
 } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 
 import navBlock from '@/components/navBlock.vue'
@@ -48,6 +48,7 @@ import navBlock from '@/components/navBlock.vue'
 export default defineComponent({
   components: { navBlock },
   setup () {
+    const route = useRoute()
     const router = useRouter()
     const store = useStore()
     // 变量
@@ -55,7 +56,13 @@ export default defineComponent({
 
     // 生命周期
     onMounted((): void => {
-      console.log('mounted')
+      for (const index0 in navList.value) {
+        for (const index1 in navList.value[index0].children) {
+          if (route.name === navList.value[index0].children[index1].route.slice(1)) {
+            store.commit('choosed', { index0: index0, index1: index1 })
+          }
+        }
+      }
     })
 
     // 前往指南页
