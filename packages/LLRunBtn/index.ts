@@ -1,7 +1,10 @@
 import LLRunBtn from './LLRunBtn.vue'
 
-LLRunBtn.install = (Vue: any) => {
-  Vue.component(LLRunBtn.name, LLRunBtn)
+const install = (app: any): void => {
+  app.component(LLRunBtn.name, LLRunBtn)
 }
 
-export default LLRunBtn
+export default {
+  install,
+  LLRunBtn
+}

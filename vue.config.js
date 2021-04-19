@@ -39,6 +39,7 @@ module.exports = {
       .loader('babel-loader')
   },
   configureWebpack: config => {
+    // lib环境
     if (isLib) {
       config.entry = components
     }
