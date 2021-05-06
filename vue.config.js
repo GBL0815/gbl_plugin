@@ -60,5 +60,11 @@ module.exports = {
         })
       ]
     }
+  },
+  devServer: {
+    disableHostCheck: true,
+    // 自动启动浏览器
+    open: true
+    // https: true
   }
 }
