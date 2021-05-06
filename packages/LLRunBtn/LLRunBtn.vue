@@ -1,12 +1,14 @@
 <template>
+  <!-- runButton -->
   <button
-    ref="runbtn"
+    v-if="type === 'run'"
+    class="runBtn"
+    ref="runBtn"
     :style="btnStyle"
-    :class="{'active': active}"
-    @click="handleClick"
-    class="running-button"
+    :class="{ active: 'active' }"
+    @click="runClick"
   >
-    <span class="default">{{ RunText }}</span>
+    <span class="default">{{ text }}</span>
     <span class="active">{{ IngText }}</span>
     <div class="running">
       <div class="outer">
@@ -18,6 +20,24 @@
         </div>
       </div>
     </div>
+  </button>
+  <!-- loadingButton -->
+  <button
+    v-if="type === 'loading'"
+    class="loadingBtn"
+    :ref="loadingBtn"
+    :class="changeLoadingClass()"
+    @click="loadingClick"
+  >
+    <p>{{ text }}</p>
+    <div class="loading">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <svg class="checkmark">
+      <polyline points="2,10 12,18 28,1"></polyline>
+    </svg>
   </button>
 </template>
 
@@ -31,8 +51,13 @@ import {
 
 export default defineComponent({
   name: 'LLRunBtn',
+  emits: ['click'],
   props: {
-    RunText: {
+    type: {
+      type: String,
+      default: 'run'
+    },
+    text: {
       type: String,
       default: 'Run'
     },
@@ -43,6 +68,10 @@ export default defineComponent({
     active: {
       type: Boolean,
       default: false
+    },
+    loading: {
+      type: Number,
+      default: 0
     },
     bgColor: {
       type: String,
@@ -63,7 +92,9 @@ export default defineComponent({
   },
   setup (props, context) {
     // 变量
-    const runbtn = ref()
+    const runBtn = ref()
+    const loadingBtn = ref()
+    const loadingClass = ref('')
     const btnWidth = ref(0)
     const btnStyle = computed(() => {
       const universalStyle = {
@@ -89,27 +120,55 @@ export default defineComponent({
 
     // 生命周期
     onMounted((): void => {
-      btnWidth.value = runbtn.value.clientWidth
+      if (props.type === 'run') {
+        btnWidth.value = runBtn.value.clientWidth
+      }
     })
 
     // 点击事件
-    const handleClick = () => {
+    const runClick = (): void => {
       context.emit('click')
+    }
+
+    const loadingClick = (): void => {
+      context.emit('click')
+    }
+
+    // 切换loading按钮样式
+    const changeLoadingClass = (): string => {
+      let loadingClass = ''
+      switch (props.loading) {
+        case 1:
+          loadingClass = 'loadingActive'
+          break
+        case 2:
+          loadingClass = 'loadingActive loadingVerity'
+          break
+        default:
+          loadingClass = ''
+          break
+      }
+      return loadingClass
     }
 
     return {
       // 变量
-      runbtn,
+      runBtn,
+      loadingBtn,
       btnStyle,
+      loadingClass,
       // 方法
-      handleClick
+      runClick,
+      loadingClick,
+      changeLoadingClass
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
-.running-button + .running-button {
+// runButton
+.runBtn + .runBtn {
   margin-left: 10px;
 }
 .running {
@@ -208,7 +267,7 @@ export default defineComponent({
     }
   }
 }
-.running-button {
+.runBtn {
   --shadow: #{rgba(#00093d, 0.2)};
   --padding-y: 4px;
   --padding-x: 36px;
@@ -272,8 +331,7 @@ export default defineComponent({
   50% {
     transform: translateY(0);
   }
-  25%,
-  75% {
+  25%, 75% {
     transform: translateY(4px);
   }
 }
@@ -281,8 +339,7 @@ export default defineComponent({
   50% {
     transform: rotate(16deg);
   }
-  25%,
-  75% {
+  25%, 75% {
     transform: rotate(24deg);
   }
 }
@@ -292,9 +349,79 @@ export default defineComponent({
   }
 }
 @keyframes arm-b {
-  30%,
-  70% {
+  30%, 70% {
     transform: rotate(var(--r-to));
   }
+}
+
+// loadingButton
+.loadingBtn{
+  position: relative;
+  border: none;
+  outline: none;
+  width: 120px;height: 50px;
+  border-radius: 50px;
+  background-color: #000;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 14px;
+  // box-shadow: 0 5px 20px #000000;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.loadingBtn.loadingActive{
+  width: 50px;height: 50px;
+  color: transparent;
+}
+.loading{
+  opacity: 0;
+  transition: 0.5s;
+}
+.loadingActive .loading{
+  position: absolute;
+  left: 50%;top: 50%;
+  transform: translate(-50%,-50%);
+  width: 70%;height: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  opacity: 1;
+}
+.loadingActive .loading div{
+  width: 3px;height: 3px;
+  border-radius: 50%;
+  background-color: #fff;
+  animation: 0.6s loading ease-in-out infinite alternate;
+}
+@keyframes loading{
+  from{ transform: translateY(0); }
+  to{ transform:  translateY(-1rem); }
+}
+.loadingActive .loading div:nth-child(2){
+  animation-delay: 0.2s;
+}
+.loadingActive .loading div:nth-child(3){
+  animation-delay: 0.4s;
+}
+.loadingVerity .loading{
+  opacity: 0;
+}
+.checkmark{
+  position: absolute;
+  left: 48%;top: 55%;
+  transform: translate(-50%,-50%);
+  width: 50%;height: 50%;
+  stroke: white;
+  fill: none;
+  stroke-width: 2px;
+  stroke-dasharray: 36px;
+  stroke-dashoffset: 36px;
+}
+.loadingVerity .checkmark{
+  animation: 0.6s show forwards;
+  animation-delay: 0.4s;
+}
+@keyframes show{
+  to{ stroke-dashoffset: 0; }
 }
 </style>
