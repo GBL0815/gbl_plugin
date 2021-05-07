@@ -1,4 +1,4 @@
 {
-    "LLRunBtn": "/packages/LLRunBtn/index.ts",
+    "LLBtn": "/packages/LLBtn/index.ts",
     "LLCountTo": "/packages/LLCountTo/index.ts"
 }

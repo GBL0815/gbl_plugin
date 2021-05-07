@@ -1,5 +1,5 @@
 <template>
-  <div class="LLRunBtn">
+  <div class="LLCountTo">
     <LLCountTo :startVal="startVal" :endVal="endVal" :duration='3000'></LLCountTo>
     <p>马上，马上就写文档</p>
   </div>

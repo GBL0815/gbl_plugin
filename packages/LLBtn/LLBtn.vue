@@ -9,7 +9,7 @@
     @click="runClick"
   >
     <span class="default">{{ text }}</span>
-    <span class="active">{{ IngText }}</span>
+    <span class="active">{{ ingText }}</span>
     <div class="running">
       <div class="outer">
         <div class="body">
@@ -26,6 +26,7 @@
     v-if="type === 'loading'"
     class="loadingBtn"
     :ref="loadingBtn"
+    :style="loadingStyle"
     :class="changeLoadingClass()"
     @click="loadingClick"
   >
@@ -35,9 +36,11 @@
       <div></div>
       <div></div>
     </div>
-    <svg class="checkmark">
-      <polyline points="2,10 12,18 28,1"></polyline>
-    </svg>
+    <div class="checkmarkRoom">
+      <svg class="checkmark" ref="loadingSvg" :stroke="color" fill="none">
+        <polyline points="5 20,16 35, 32 9" />
+      </svg>
+    </div>
   </button>
 </template>
 
@@ -50,7 +53,7 @@ import {
 } from 'vue'
 
 export default defineComponent({
-  name: 'LLRunBtn',
+  name: 'LLBtn',
   emits: ['click'],
   props: {
     type: {
@@ -61,15 +64,11 @@ export default defineComponent({
       type: String,
       default: 'Run'
     },
-    IngText: {
+    ingText: {
       type: String,
       default: 'Ing'
     },
     active: {
-      type: Boolean,
-      default: false
-    },
-    loading: {
       type: Number,
       default: 0
     },
@@ -85,21 +84,32 @@ export default defineComponent({
       type: String,
       default: '#ffffff'
     },
+    width: {
+      type: String,
+      default: '125px'
+    },
     height: {
       type: String,
       default: '35px'
+    },
+    fontSize: {
+      type: String,
+      default: '14px'
     }
   },
   setup (props, context) {
     // 变量
     const runBtn = ref()
+    const btnWidth = ref(0)
     const loadingBtn = ref()
     const loadingClass = ref('')
-    const btnWidth = ref(0)
+    const loadingSvg = ref()
     const btnStyle = computed(() => {
       const universalStyle = {
+        width: props.width,
         height: props.height,
-        color: props.color
+        color: props.color,
+        fontSize: props.fontSize
       }
       let style = {}
       if (props.active) {
@@ -117,11 +127,35 @@ export default defineComponent({
       }
       return { ...style, ...universalStyle }
     })
+    const loadingStyle = computed(() => {
+      const universalStyle = {
+        height: props.height,
+        fontSize: props.fontSize
+      }
+      let style = {}
+      if (props.active) {
+        style = {
+          width: props.height,
+          color: 'transparent',
+          'background-color': props.bgColor_active
+        }
+      } else {
+        style = {
+          width: props.width,
+          color: props.color,
+          'background-color': props.bgColor
+        }
+      }
+      return { ...style, ...universalStyle }
+    })
 
     // 生命周期
     onMounted((): void => {
       if (props.type === 'run') {
-        btnWidth.value = runBtn.value.clientWidth
+        btnWidth.value = parseInt(props.width.slice(0, -2))
+      } else if (props.type === 'loading') {
+        const scale = parseInt(props.height.slice(0, -2)) / 50
+        loadingSvg.value.setAttribute('transform', `scale(${scale}, ${scale})`)
       }
     })
 
@@ -137,7 +171,7 @@ export default defineComponent({
     // 切换loading按钮样式
     const changeLoadingClass = (): string => {
       let loadingClass = ''
-      switch (props.loading) {
+      switch (props.active) {
         case 1:
           loadingClass = 'loadingActive'
           break
@@ -154,9 +188,11 @@ export default defineComponent({
     return {
       // 变量
       runBtn,
-      loadingBtn,
       btnStyle,
+      loadingBtn,
       loadingClass,
+      loadingStyle,
+      loadingSvg,
       // 方法
       runClick,
       loadingClick,
@@ -273,9 +309,8 @@ export default defineComponent({
   --padding-x: 36px;
   margin: 0;
   padding: var(--padding-y) 0;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 24px;
+  font-weight: bold;
+  border-radius: 25px;
   line-height: 23px;
   position: relative;
   border: none;
@@ -359,19 +394,11 @@ export default defineComponent({
   position: relative;
   border: none;
   outline: none;
-  width: 120px;height: 50px;
   border-radius: 50px;
-  background-color: #000;
-  color: #FFF;
   font-weight: bold;
-  font-size: 14px;
   // box-shadow: 0 5px 20px #000000;
   cursor: pointer;
   transition: 0.5s;
-}
-.loadingBtn.loadingActive{
-  width: 50px;height: 50px;
-  color: transparent;
 }
 .loading{
   opacity: 0;
@@ -406,16 +433,16 @@ export default defineComponent({
 .loadingVerity .loading{
   opacity: 0;
 }
-.checkmark{
+.checkmarkRoom {
   position: absolute;
-  left: 48%;top: 55%;
+  left: 50%;top: 50%;
   transform: translate(-50%,-50%);
-  width: 50%;height: 50%;
-  stroke: white;
-  fill: none;
-  stroke-width: 2px;
-  stroke-dasharray: 36px;
-  stroke-dashoffset: 36px;
+  .checkmark{
+    width: 40px;height: 40px;
+    stroke-width: 2px;
+    stroke-dasharray: 55px;
+    stroke-dashoffset: 55px;
+  }
 }
 .loadingVerity .checkmark{
   animation: 0.6s show forwards;

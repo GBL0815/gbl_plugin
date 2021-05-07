@@ -3,7 +3,7 @@
     <!-- 支持 -->
     <h2>支持</h2>
     <h3 class="tab">支持的框架</h3>
-    <p>目前只支持vue3.X版本</p>
+    <p>目前只支持vue3.X版本(什么！你还没有上手vue3?不如搜一搜<a href="https://www.npmjs.com/package/gbl_cli">gbl_cli</a>给我加个下载量吧。)</p>
     <!-- 安装 -->
     <h2 class="title">安装</h2>
     <h3 class="tab">npm / yarn 安装</h3>
@@ -39,7 +39,7 @@
       <div class="line">
         <span class="keyword">import </span>
         <span class="punctuation">{ </span>
-        LLRunBtn
+        LLBtn
         <span class="punctuation">} </span>
         <span class="keyword">from </span>
         <span class="string">'gbl_plugin'</span>
@@ -52,7 +52,7 @@
         <span>app.</span>
         <span class="function">use</span>
         <span class="punctuation">(</span>
-        <span>LLRunBtn</span>
+        <span>LLBtn</span>
         <span class="punctuation">)</span>
       </div>
     </code>
@@ -61,7 +61,7 @@
       <div class="line">
         <span class="keyword">import </span>
         <span class="punctuation">{ </span>
-        LLRunBtn
+        LLBtn
         <span class="punctuation">} </span>
         <span class="keyword">from </span>
         <span class="string">'gbl_plugin'</span>
@@ -73,7 +73,7 @@
       <div class="line">
         components:
         <span class="punctuation">{ </span>
-        LLRunBtn
+        LLBtn
         <span class="punctuation">}</span>
       </div>
     </code>
@@ -94,17 +94,4 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.index {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-left: 40px;
-  color: #5e6d82;
-  .title {
-    margin-top: 60px;
-  }
-  .tab {
-    margin: 50px 0 20px;
-  }
-}
 </style>

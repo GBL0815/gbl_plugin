@@ -1,9 +1,9 @@
-import RunBtn from '~/LLRunBtn/index'
+import btn from '~/LLBtn/index'
 import CountTo from '~/LLCountTo/index'
 import '../public/common.scss'
 
 const components = [
-  RunBtn.LLRunBtn,
+  btn.LLBtn,
   CountTo.LLCountTo
 ]
 
@@ -15,5 +15,5 @@ export default {
   install
 }
 
-export const LLRunBtn = RunBtn
+export const LLBtn = btn
 export const LLCountTo = CountTo
