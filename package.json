@@ -16,11 +16,11 @@
     "build-publish": "vue-cli-service build --target lib --name gbl_plugin --dest lib packages/index.ts"
   },
   "dependencies": {
-    "axios": "^0.21.1",
-    "core-js": "^3.16.3",
-    "vue": "^3.2.6",
+    "axios": "^0.25.0",
+    "core-js": "^3.21.0",
+    "vue": "^3.2.30",
     "vue-class-component": "^8.0.0-rc.1",
-    "vue-router": "^4.0.11",
+    "vue-router": "^4.0.12",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
